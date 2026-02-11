@@ -1,0 +1,102 @@
+<mxfile host="65bd71144e">
+    <diagram id="financial-architecture" name="Mutual Fund Microservices">
+        <mxGraphModel dx="1045" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="stage1" value="STAGE 1: INGESTION &amp;amp; ETL" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="40" y="40" width="340" height="560" as="geometry"/>
+                </mxCell>
+                <mxCell id="mongo_db" value="MongoDB&#xa;(Time-Series NAV)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="stage1" vertex="1">
+                    <mxGeometry x="215" y="284" width="80" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="c3" style="exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitDx=0;exitDy=0;" parent="stage1" source="nav_ms" target="mongo_db" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="nav_ms" value="NAV &amp;amp; Time-Series MS&#xa;(Session-based Requests)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="stage1" vertex="1">
+                    <mxGeometry x="185" y="180" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="c1" style="exitX=0.5;exitY=1;entryX=0.5;entryY=0;" parent="stage1" source="amfi_src" target="nav_ms" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="amfi_src" value="AMFI Web Portal&#xa;(Daily NAV Scraping)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="stage1" vertex="1">
+                    <mxGeometry x="190" y="70" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="fact_ms" value="AMC Factsheet MS&#xa;(LLM PDF Extraction)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="stage1" vertex="1">
+                    <mxGeometry x="10" y="455" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="vec_db" value="Vector Store&#xa;(Pinecone/FAISS)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="stage1" vertex="1">
+                    <mxGeometry x="197.5" y="440" width="115" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="c5" style="exitX=1;exitY=0.5;entryX=0;entryY=0.5;rounded=0;exitDx=0;exitDy=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="stage1" source="fact_ms" target="vec_db" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="mfc_src" value="MFCentral API&#xa;(JWT / OTP Auth)" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="stage1" vertex="1">
+                    <mxGeometry x="20" y="70" width="140" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="c2" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" parent="stage1" source="mfc_src" target="port_ms" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="port_ms" value="Portfolio Sync MS&#xa;(PAN Sync / CAS Fetch)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="stage1" vertex="1">
+                    <mxGeometry x="20" y="170" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="c4" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" parent="stage1" source="port_ms" target="sql_db" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="sql_db" value="SQL DB&#xa;(Normalized Portfolio)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="stage1" vertex="1">
+                    <mxGeometry x="50" y="290" width="80" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="stage2" value="STAGE 2: ANALYTICAL PROCESSING" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="440" y="40" width="300" height="560" as="geometry"/>
+                </mxCell>
+                <mxCell id="ml_engine" value="&lt;b&gt;ML ENGINE&lt;/b&gt;&lt;br&gt;--&lt;br&gt;Rolling Volatility&lt;br&gt;Sharpe Ratio Calc&lt;br&gt;Random Forest Regressor" style="whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="stage2" vertex="1">
+                    <mxGeometry x="60" y="90" width="200" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="stage3" value="STAGE 3: OUTPUT &amp;amp; PRESENTATION" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="800" y="40" width="320" height="560" as="geometry"/>
+                </mxCell>
+                <mxCell id="adv_dash" value="&lt;b&gt;ADVISOR DASHBOARD&lt;/b&gt;&lt;br&gt;--&lt;br&gt;Deep Tech Metrics&lt;br&gt;Compliance Alerts&lt;br&gt;Scenario Simulation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="stage3" vertex="1">
+                    <mxGeometry x="60" y="90" width="200" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="rag_engine" value="&lt;b&gt;LLM RAG ENGINE&lt;/b&gt;&lt;br&gt;--&lt;br&gt;Semantic Search&lt;div&gt;Contextual Retrieval&lt;br style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Contextual Insight&lt;/span&gt;&lt;br&gt;Factsheet Retrieva&lt;/div&gt;&lt;div&gt;Contextual Analysis&lt;/div&gt;&lt;div&gt;Sentiment Mapping&lt;/div&gt;" style="whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="stage3" vertex="1">
+                    <mxGeometry x="-310" y="290" width="200" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="c9" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="stage3" source="rag_engine" target="cli_port" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="cli_port" value="&lt;b&gt;CLIENT PORTAL&lt;/b&gt;&lt;br&gt;--&lt;br&gt;Goal Tracking&lt;div&gt;Simplified Visuals&lt;br&gt;&lt;div&gt;Wealth Goal Progress&lt;br&gt;Visual Performance&lt;br&gt;Rebalancing Recommendations&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="stage3" vertex="1">
+                    <mxGeometry x="60" y="290" width="200" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="c6" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.5;dashed=1;" parent="1" source="mongo_db" target="ml_engine" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="335" y="370"/>
+                            <mxPoint x="410" y="370"/>
+                            <mxPoint x="410" y="195"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="3" value="cleaned time&lt;div&gt;series data&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;" parent="c6" vertex="1" connectable="0">
+                    <mxGeometry x="-0.6814" y="1" relative="1" as="geometry">
+                        <mxPoint x="23" y="-49" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="c7" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0.5;entryY=1;dashed=1;exitDx=0;exitDy=0;exitPerimeter=0;entryDx=0;entryDy=0;" parent="1" source="vec_db" target="rag_engine" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="590" y="525"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4" value="embeddings" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;" parent="c7" vertex="1" connectable="0">
+                    <mxGeometry x="0.0985" y="-4" relative="1" as="geometry">
+                        <mxPoint x="-23" y="-14" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="c8" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="1" source="ml_engine" target="adv_dash" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

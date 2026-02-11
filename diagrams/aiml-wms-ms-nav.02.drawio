@@ -1,0 +1,82 @@
+<mxfile host="65bd71144e">
+    <diagram id="nav_ms_expanded" name="NAV MS Deep Dive">
+        <mxGraphModel dx="1061" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="lane1" value="DATA INGESTION AND VALIDATION" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="40" width="300" height="740" as="geometry"/>
+                </mxCell>
+                <mxCell id="a1" value="Trigger: AMFI Daily CSV&#xa;(5-Year Historical + Daily)" style="shape=note;whiteSpace=wrap;html=1;fillColor=#dae8fc;size=17;" parent="lane1" vertex="1">
+                    <mxGeometry x="62.5" y="70" width="175" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="a2" value="Session-Based&#xa;HTTP Scraper" style="rounded=1;whiteSpace=wrap;html=1;" parent="lane1" vertex="1">
+                    <mxGeometry x="90" y="170" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="a3" value="Validation Check:&#xa;Price Spikes / Gaps?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;" parent="lane1" vertex="1">
+                    <mxGeometry x="90" y="270" width="120" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="a4" value="Cleaned Time-Series&#xa;Store (MongoDB)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" parent="lane1" vertex="1">
+                    <mxGeometry x="85" y="460" width="130" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="lane2" value="FEATURE ENGINEERING AND TRAINING" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="40" width="400" height="740" as="geometry"/>
+                </mxCell>
+                <mxCell id="b1" value="Rolling Feature Extraction:&#xa;- 30/90d Volatility&#xa;- Sharpe Ratio&#xa;- Treynor Index&#xa;- Expense Ratio (from SQL)" style="rounded=1;whiteSpace=wrap;html=1;" parent="lane2" vertex="1">
+                    <mxGeometry x="100" y="230" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="b2" value="TimeSeriesSplit&#xa;(Cross-Validation Loop)" style="rounded=1;whiteSpace=wrap;html=1;" parent="lane2" vertex="1">
+                    <mxGeometry x="100" y="360" width="200" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="b3" value="Random Forest Regressor&#xa;Training / Refit" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1" parent="lane2" vertex="1">
+                    <mxGeometry x="100" y="440" width="200" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="b4" value="Output: Prediction Residuals&#xa;(Actual NAV vs Predicted)" style="rounded=0;whiteSpace=wrap;html=1;" parent="lane2" vertex="1">
+                    <mxGeometry x="100" y="520" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="lane3" value="ANALYTICAL OUTPUT" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;" parent="1" vertex="1">
+                    <mxGeometry x="740" y="40" width="300" height="740" as="geometry"/>
+                </mxCell>
+                <mxCell id="c1" value="Identify &#39;Off-Track&#39; Funds&#xa;(High Residual Delta)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;" parent="lane3" vertex="1">
+                    <mxGeometry x="70" y="500" width="190" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="c2" value="Compliance Alert /&#xa;Portfolio Rebalance Signal" style="shape=parallelogram;whiteSpace=wrap;html=1;fillColor=#dae8fc;" parent="lane3" vertex="1">
+                    <mxGeometry x="55" y="650" width="220" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="e9" value="Threshold Met" parent="lane3" source="c1" target="c2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e1" value="HTTPS" parent="1" source="a1" target="a2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e2" parent="1" source="a2" target="a3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e3" value="Clean" parent="1" source="a3" target="a4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e4" value="BSON/Batch" parent="1" source="a4" target="b1" edge="1">
+                    <mxGeometry x="0.3263" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="380" y="550"/>
+                            <mxPoint x="380" y="310"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e5" parent="1" source="b1" target="b2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e6" parent="1" source="b2" target="b3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e7" parent="1" source="b3" target="b4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e8" value="JSON" parent="1" source="b4" target="c1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
