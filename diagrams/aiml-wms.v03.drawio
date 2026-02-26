@@ -1,46 +1,20 @@
 <mxfile host="65bd71144e">
     <diagram id="technical_final" name="Integrated Mutual Fund AI">
-        <mxGraphModel dx="1349" dy="834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+        <mxGraphModel dx="1326" dy="880" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="s1" value="STAGE 1: INGESTION AND ETL" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontStyle=1" parent="1" vertex="1">
-                    <mxGeometry x="20" y="30" width="450" height="770" as="geometry"/>
-                </mxCell>
-                <mxCell id="fact_in" value="Factsheets &amp;amp; SEBI Guidelines" style="shape=document;whiteSpace=wrap;html=1;fillColor=#dae8fc;" parent="s1" vertex="1">
-                    <mxGeometry x="20" y="50" width="110" height="70" as="geometry"/>
-                </mxCell>
-                <mxCell id="scheme_ms" value="AMC Scheme MS (FinGPT/OCR)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" parent="s1" vertex="1">
-                    <mxGeometry x="20" y="160" width="100" height="70" as="geometry"/>
-                </mxCell>
-                <mxCell id="vdb" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Vector Store (Pinecone/FAISS)&lt;/span&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" parent="s1" vertex="1">
-                    <mxGeometry x="17.5" y="510" width="105" height="101" as="geometry"/>
-                </mxCell>
-                <mxCell id="mfc_in" value="MFCentral API" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;" parent="s1" vertex="1">
-                    <mxGeometry x="305" y="50" width="90" height="40" as="geometry"/>
-                </mxCell>
-                <mxCell id="mfc_ms" value="MFCentral Sync MS (JWT/OTP)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" parent="s1" vertex="1">
-                    <mxGeometry x="300" y="160" width="100" height="70" as="geometry"/>
-                </mxCell>
-                <mxCell id="sql" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;SQL DB&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;(User Folios)&lt;/span&gt;&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" parent="s1" vertex="1">
-                    <mxGeometry x="297.5" y="638" width="105" height="101" as="geometry"/>
-                </mxCell>
-                <mxCell id="c3" value="REST/JWT" parent="s1" source="mfc_in" target="mfc_ms" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="c6" value="JDBC/SQL" parent="s1" source="mfc_ms" target="sql" edge="1">
-                    <mxGeometry x="-0.7931" relative="1" as="geometry">
-                        <mxPoint as="offset"/>
-                    </mxGeometry>
+                <mxCell id="s1" value="STAGE 1: INGESTION AND ETL" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontStyle=0" parent="1" vertex="1">
+                    <mxGeometry x="20" y="30" width="450" height="630" as="geometry"/>
                 </mxCell>
                 <mxCell id="amfi_in" value="AMFI 5-Year&lt;div&gt;NAV History&lt;/div&gt;" style="shape=parallelogram;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" parent="s1" vertex="1">
                     <mxGeometry x="155" y="50" width="140" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="nav_ms" value="NAV MS (Daily Scraper)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" parent="s1" vertex="1">
-                    <mxGeometry x="170" y="160" width="100" height="70" as="geometry"/>
+                <mxCell id="nav_ms" value="&lt;b&gt;NAV MS&amp;nbsp;&lt;/b&gt;&lt;div&gt;(Daily Scraper for latest NAVs &amp;amp; fund catgories)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" parent="s1" vertex="1">
+                    <mxGeometry x="170" y="160" width="100" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="mongo" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;MongoDB&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;(NAV History)&lt;/span&gt;&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" parent="s1" vertex="1">
-                    <mxGeometry x="167.5" y="550" width="102.5" height="101" as="geometry"/>
+                <mxCell id="mongo" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;MongoDB&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;(NAV History)&lt;/span&gt;&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;spacingTop=15;" parent="s1" vertex="1">
+                    <mxGeometry x="168.75" y="399" width="102.5" height="82" as="geometry"/>
                 </mxCell>
                 <mxCell id="c2" value="HTTPS/Scrape" parent="s1" source="amfi_in" target="nav_ms" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -50,59 +24,76 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="s2" value="STAGE 2: ANALYTICAL ENGINES" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontStyle=1" parent="1" vertex="1">
-                    <mxGeometry x="500" y="30" width="260" height="770" as="geometry"/>
+                <mxCell id="fact_in" value="Factsheets &amp;amp; SEBI Guidelines" style="shape=document;whiteSpace=wrap;html=1;fillColor=#dae8fc;spacingTop=0;verticalAlign=top;" parent="s1" vertex="1">
+                    <mxGeometry x="312.5" y="50" width="110" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="ml_box" value="&lt;b&gt;ML Training&lt;/b&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: transparent;&quot;&gt;Random Forest Regressor&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;--&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Validation: TimeSeriesSplit&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Features: Rolling Volatility, Sharpe&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" parent="s2" vertex="1">
-                    <mxGeometry x="20" y="415" width="220" height="87" as="geometry"/>
+                <mxCell id="scheme_ms" value="&lt;b&gt;AMC Scheme MS&lt;/b&gt; (OCR &amp;amp; FinGPT Embedding)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" parent="s1" vertex="1">
+                    <mxGeometry x="303.75" y="160" width="117.5" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="rag_box" value="&lt;b&gt;RAG Engine&lt;/b&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;FinGPT Retrieval Pipeline&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;--&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Context: AMC Factsheets&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Logic: Scenario Simulation (Int. Rates)&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" parent="s2" vertex="1">
-                    <mxGeometry x="20" y="284" width="220" height="100" as="geometry"/>
+                <mxCell id="vdb" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Vector Store (Pinecone/FAISS)&lt;/span&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;spacingTop=15;" parent="s1" vertex="1">
+                    <mxGeometry x="310" y="283" width="105" height="87" as="geometry"/>
                 </mxCell>
-                <mxCell id="tester" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;b&gt;OFF-TRACK LOGIC TESTER&lt;/b&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Simulated Interest Rate and Sector Corrections&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" parent="s2" vertex="1">
-                    <mxGeometry x="20" y="530" width="220" height="77" as="geometry"/>
-                </mxCell>
-                <mxCell id="s3" value="STAGE 3: OUTPUT" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontStyle=1" parent="1" vertex="1">
-                    <mxGeometry x="800" y="30" width="320" height="770" as="geometry"/>
-                </mxCell>
-                <mxCell id="gpt5" value="GPT-5 Report Gen and Validation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;" parent="s3" vertex="1">
-                    <mxGeometry x="70" y="380" width="210" height="70" as="geometry"/>
-                </mxCell>
-                <mxCell id="ui" value="Advisor Dashboard / Client Portal" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;" parent="s3" vertex="1">
-                    <mxGeometry x="70" y="678" width="210" height="50" as="geometry"/>
-                </mxCell>
-                <mxCell id="c1" value="HTTPS/PDF" style="exitX=0.436;exitY=0.929;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="fact_in" target="scheme_ms" edge="1">
+                <mxCell id="c1" value="HTTPS/PDF" style="exitX=0.436;exitY=0.929;exitDx=0;exitDy=0;exitPerimeter=0;" parent="s1" source="fact_in" target="scheme_ms" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="c4" value="gRPC/Vector" parent="1" source="scheme_ms" target="vdb" edge="1">
+                <mxCell id="c4" value="gRPC/Vector" parent="s1" source="scheme_ms" target="vdb" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="mfc_in" value="MFCentral API" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;" parent="s1" vertex="1">
+                    <mxGeometry x="27.5" y="50" width="90" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="mfc_ms" value="&lt;b&gt;MF Central Sync MS&lt;/b&gt;&lt;div&gt;(Auth: JWT/OTP)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" parent="s1" vertex="1">
+                    <mxGeometry x="4.380000000000001" y="160" width="136.25" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="sql" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;SQL DB&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;(User Folios)&lt;/span&gt;&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;spacingTop=15;" parent="s1" vertex="1">
+                    <mxGeometry x="20" y="505" width="105" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="c3" value="REST/JWT" parent="s1" source="mfc_in" target="mfc_ms" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c6" value="JDBC/SQL" parent="s1" source="mfc_ms" target="sql" edge="1">
                     <mxGeometry x="-0.7931" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="c7" value="Internal/Batch" style="entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.855;exitY=0;exitDx=0;exitDy=4.35;exitPerimeter=0;" parent="1" source="mongo" target="ml_box" edge="1">
+                <mxCell id="s2" value="STAGE 2: ANALYTICAL ENGINES" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="519" y="30" width="260" height="630" as="geometry"/>
+                </mxCell>
+                <mxCell id="ml_box" value="&lt;b&gt;ML Training&lt;/b&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: transparent;&quot;&gt;Random Forest Regressor&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;--&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Validation: TimeSeriesSplit&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Features: Rolling Volatility, Sharpe&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" parent="s2" vertex="1">
+                    <mxGeometry x="20" y="396" width="220" height="87" as="geometry"/>
+                </mxCell>
+                <mxCell id="rag_box" value="&lt;b&gt;RAG Engine&lt;/b&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;FinGPT Retrieval Pipeline&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;--&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Context: AMC Factsheets&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Logic: Scenario Simulation (Int. Rates)&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" parent="s2" vertex="1">
+                    <mxGeometry x="20" y="276" width="220" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="tester" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;b&gt;OFF-TRACK LOGIC TESTER&lt;/b&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Simulated Interest Rate and Sector Corrections&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" parent="s2" vertex="1">
+                    <mxGeometry x="20" y="505" width="220" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="s3" value="STAGE 3: OUTPUT" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="819" y="30" width="320" height="630" as="geometry"/>
+                </mxCell>
+                <mxCell id="gpt5" value="GPT-5 Report Gen and Validation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;" parent="s3" vertex="1">
+                    <mxGeometry x="81" y="349" width="210" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="ui" value="Advisor Dashboard / Client Portal" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;" parent="s3" vertex="1">
+                    <mxGeometry x="81" y="555" width="210" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="c7" value="Internal/Batch" style="entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="mongo" target="ml_box" edge="1">
                     <mxGeometry x="-0.2591" y="10" relative="1" as="geometry">
                         <mxPoint x="430" y="70" as="targetPoint"/>
-                        <Array as="points">
-                            <mxPoint x="300" y="490"/>
-                        </Array>
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="c8" value="Internal/Query" style="entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="vdb" target="rag_box" edge="1">
-                    <mxGeometry x="-0.268" y="14" relative="1" as="geometry">
+                <mxCell id="c8" value="Internal/Query" style="entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="vdb" target="rag_box" edge="1">
+                    <mxGeometry x="-0.1359" y="14" relative="1" as="geometry">
                         <mxPoint x="430" y="296" as="targetPoint"/>
-                        <Array as="points">
-                            <mxPoint x="150" y="364"/>
-                        </Array>
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="c9" value="Internal" style="exitX=0.855;exitY=0;exitDx=0;exitDy=4.35;exitPerimeter=0;" parent="1" source="sql" target="tester" edge="1">
+                <mxCell id="c9" value="Internal" style="exitX=1;exitY=0;exitDx=0;exitDy=32.75;exitPerimeter=0;" parent="1" source="sql" target="tester" edge="1">
                     <mxGeometry x="0.0361" y="10" relative="1" as="geometry">
-                        <mxPoint x="430" y="414" as="targetPoint"/>
-                        <Array as="points">
-                            <mxPoint x="430" y="600"/>
-                        </Array>
+                        <mxPoint x="430" y="377" as="targetPoint"/>
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
@@ -115,10 +106,11 @@
                 <mxCell id="c12" value="HTTPS" parent="1" source="gpt5" target="ui" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="JDBC" style="entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0;exitDx=0;exitDy=68.24999999999999;exitPerimeter=0;" edge="1" parent="1" source="sql" target="ui">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="560" y="482" as="targetPoint"/>
-                        <mxPoint x="428" y="488" as="sourcePoint"/>
+                <mxCell id="3" value="JDBC" style="entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=1;exitDx=0;exitDy=-15;exitPerimeter=0;" parent="1" source="sql" target="ui" edge="1">
+                    <mxGeometry x="-0.3986" y="2" relative="1" as="geometry">
+                        <mxPoint x="560" y="445" as="targetPoint"/>
+                        <mxPoint x="428" y="451" as="sourcePoint"/>
+                        <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
             </root>

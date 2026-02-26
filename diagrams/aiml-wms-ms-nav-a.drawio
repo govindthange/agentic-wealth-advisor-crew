@@ -1,0 +1,88 @@
+<mxfile host="65bd71144e">
+    <diagram id="nav_ms_expanded" name="NAV MS Internal Logic">
+        <mxGraphModel dx="990" dy="880" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="lane" value="NAV MS: DATA SCRAPING &amp; ML PIPELINE" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;startSize=30;fontStyle=1;spacingTop=0;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="40" width="720" height="960" as="geometry"/>
+                </mxCell>
+                <mxCell id="in1" value="AMFI Daily Feed&#xa;(Current NAV)" style="shape=parallelogram;whiteSpace=wrap;html=1;fillColor=#ffffff;" parent="lane" vertex="1">
+                    <mxGeometry x="40" y="60" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="in2" value="MongoDB&#xa;(5-Year Historical NAV)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;spacingTop=15;" parent="lane" vertex="1">
+                    <mxGeometry x="220" y="50" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="v1" value="Validation Logic:&#xa;Spike Check &amp; Gap Analysis" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;" parent="lane" vertex="1">
+                    <mxGeometry x="115" y="180" width="170" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="fe" value="FEATURE ENGINEERING ENGINE&#xa;--&#xa;1. Rolling Returns (1D, 7D, 30D)&#xa;2. Rolling Volatility (STD)&#xa;3. Benchmark Correlation (NIFTY 50)&#xa;4. Technical Indicators (RSI, SMA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;align=left;spacingLeft=10;" parent="lane" vertex="1">
+                    <mxGeometry x="60" y="340" width="280" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="branch" value="Operation Mode?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;" parent="lane" vertex="1">
+                    <mxGeometry x="400" y="340" width="140" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="train1" value="TRAINING PIPELINE&#xa;(Weekly Retrain)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;" parent="lane" vertex="1">
+                    <mxGeometry x="340" y="480" width="340" height="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="ts" value="Data Splitting:&#xa;TimeSeriesSplit (k=5)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;" parent="train1" vertex="1">
+                    <mxGeometry x="20" y="50" width="140" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="rf_train" value="Random Forest Fit:&#xa;n_estimators=500&#xa;max_depth=20" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;" parent="train1" vertex="1">
+                    <mxGeometry x="180" y="50" width="140" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="metrics" value="Validation Metrics:&#xa;RMSE, MAE, R-Squared" style="shape=document;whiteSpace=wrap;html=1;fillColor=#ffffff;" parent="train1" vertex="1">
+                    <mxGeometry x="95" y="140" width="150" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="model_save" value="Model Registry:&#xa;Save .joblib / .pkl" style="shape=process;whiteSpace=wrap;html=1;fillColor=#dae8fc;" parent="train1" vertex="1">
+                    <mxGeometry x="95" y="240" width="150" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="inf1" value="INFERENCE PIPELINE&#xa;(Daily Prediction)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;" parent="lane" vertex="1">
+                    <mxGeometry x="40" y="480" width="280" height="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="load" value="Load Latest Model Instance" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;" parent="inf1" vertex="1">
+                    <mxGeometry x="60" y="60" width="160" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="predict" value="Execute Prediction:&#xa;Expected 1D Return" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;" parent="inf1" vertex="1">
+                    <mxGeometry x="60" y="150" width="160" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="output" value="Output JSON:&#xa;Predicted NAV &amp; Risk Score" style="shape=parallelogram;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" parent="inf1" vertex="1">
+                    <mxGeometry x="50" y="240" width="180" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="sink" value="ADVISOR DASHBOARD:&#xa;Technical Metric Stream" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;" parent="lane" vertex="1">
+                    <mxGeometry x="240" y="860" width="240" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="e1" parent="lane" source="in1" target="v1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e2" parent="lane" source="in2" target="v1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e3" value="Clean" parent="lane" source="v1" target="fe" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e4" parent="lane" source="fe" target="branch" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e5" value="Retrain" parent="lane" source="branch" target="train1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e6" value="Daily Pred" parent="lane" source="branch" target="inf1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e7" parent="lane" source="inf1" target="sink" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e8" parent="lane" source="ts" target="rf_train" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e9" parent="lane" source="rf_train" target="metrics" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e10" parent="lane" source="metrics" target="model_save" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
