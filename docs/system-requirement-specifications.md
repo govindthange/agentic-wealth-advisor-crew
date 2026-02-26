@@ -4,19 +4,16 @@ This Software Requirements Specification (SRS) document outlines the functional 
 
 # 1. Introduction
 
-The objective is to build an AI system that provides real-time portfolio analysis, risk assessment, and personalized asset allocation recommendations for Indian mutual fund investors. The proposed system should bridge the gap between complex technical analytics for advisors and clear, actionable insights for clients.
+The objective is to build a scalable distributed AI based solution (preferably using microservices styled architecture) that utilizes combination of rule based automation, Gen AI and Agentic AI solution (using frameworks like CrewAI or LangChain/LangGraph etc) to provide real-time portfolio analysis, risk assessment, and personalized asset allocation recommendations for Indian mutual fund investors. The proposed system should bridge the gap between complex technical analytics for advisors and clear, actionable insights for clients.
 
-Wealth management requires **precision, compliance, and personalization**.
-
-An LLM can:
-
+Wealth management requires **precision, compliance, and personalization** and Agentic AI, Gen AI or LLMs can be evaluated for following aspects:
 - **Analyze portfolios** and generate insights on asset allocation.
 - **Summarize financial reports** for advisors and clients.
 - **Automate customer support** with natural language chat.
 - **Detect fraud or anomalies** in transactions.
 - **Assist compliance teams** with regulatory documentation.
 
-How to Use LLMs for Asset Allocation?
+Furthermore, the solution can be explored for Asset Allocation like so.
 
 1. **Data Integration**
    Connect the LLM to portfolio data (holdings, performance, benchmarks).
@@ -36,12 +33,16 @@ A wealth management firm wants to provide clients with **real-time portfolio ana
 
 ## Portfolio Analyzer Workflow
 
-### **Data Ingestion**
+> **Instruction:** When drafting the solution in a Technical Specification Document (TSD) include a detailed flow chart and DFD so that the process flow is clear.
+
+### Phase I. Data Ingestion
 1. Pull client portfolio data (stocks, bonds, ETFs, mutual funds, alternatives).
 2. Connect to live market feeds (Bloomberg Terminal, Yahoo Finance, etc.).
 3. Integrate CRM data (client risk profile, investment horizon, preferences).
 
-### **LLM Analysis (BloombergGPT / FinGPT)**
+### Phase II. Data Analysis
+
+Explore and evaluate whether BloombergGPT / FinGPT / something else can be used.
 
 **Step 1: Portfolio Breakdown**
 1. Summarize holdings by asset class, sector, geography.
@@ -63,21 +64,30 @@ A wealth management firm wants to provide clients with **real-time portfolio ana
     - Increase international equities (emerging markets).
     - Add inflation-protected bonds (TIPS).
     - Maintain 5% cash buffer.
-2. **Client-Friendly Report (GPT-5 Layer)**
+2. Client-Friendly Report (GPT-5 Layer)
+  Translate technical insights into plain language:
 
-Translate technical insights into plain language:
-
-```
-Your portfolio is currently overweight in US technology stocks. To reduce risk, we recommend diversifying into emerging markets and adding inflation-protected bonds. This will balance growth potential with stability.
-```
-
-3. **Advisor Dashboard**
+  ```
+  Your portfolio is currently overweight in US technology stocks. To reduce risk, we recommend diversifying into emerging markets and adding inflation-protected bonds. This will balance growth potential with stability.
+  ```
+3. Advisor Dashboard
 - Advisors see detailed analytics, stress tests, and compliance checks.
 - Can override or adjust recommendations before sending to clients.
 
-## Example Output (Client View)
+### Phase III. Generate Output (Client View)
 
-📈 Portfolio Summary: - Equities: 60% (Tech-heavy, high growth but high risk) - Bonds: 25% (Stable, but sensitive to interest rates) - Real Estate: 10% - Cash: 5% ⚠️ Risks Identified: - Overexposure to US tech sector - Limited international diversification ✅ Recommended Adjustments: - Reduce tech equities by 15% - Add 10% emerging market equities - Increase inflation-protected bonds by 5% 
+📈 Portfolio Summary:
+- Equities: 60% (Tech-heavy, high growth but high risk)
+- Bonds: 25% (Stable, but sensitive to interest rates)
+- Real Estate: 10%
+- Cash: 5% ⚠️ Risks Identified:
+- Overexposure to US tech sector
+- Limited international diversification
+
+✅ Recommended Adjustments:
+- Reduce tech equities by 15%
+- Add 10% emerging market equities
+- Increase inflation-protected bonds by 5% 
 
 ## Why This Works?
 
@@ -86,18 +96,13 @@ Your portfolio is currently overweight in US technology stocks. To reduce risk, 
 - **Hybrid setup** → Advisors get technical depth, clients get clarity.
 
 
-## Example 1. Analyzing a MF portfolio in the Indian market
+## Example 1. Mutual Fund Portfolio Analysis (India)
 
-A **sample workflow for analyzing a client’s mutual fund portfolio in the Indian market using an LLM**.
-
-Following section walk you through each stage, showing how the model processes data and generates insights.
-
-🧩 Sample Workflow: Mutual Fund Portfolio Analysis (India)
+Following section is a workflow for analyzing a client’s mutual fund portfolio in the Indian market using an LLM. It walks you through each stage, showing how the model is expected to process data and generate insights.
 
 **Step 1: Input Portfolio Data**
 
-Client portfolio (example):
-
+Read Client portfolio: for example
 - **Equity Mutual Funds**: 50%
   - Large Cap: 25% (HDFC Top 100 Fund, SBI Bluechip Fund)
   - Mid Cap: 15% (Kotak Emerging Equity Fund)
@@ -109,12 +114,14 @@ Client portfolio (example):
 - **Hybrid Funds**: 15% (ICICI Prudential Balanced Advantage Fund)
 - **Liquid Fund**: 5% (Nippon India Liquid Fund)
 
-Client profile: Moderate risk tolerance, 15-year horizon, goal = retirement planning.
+Read Client profile: for example
+- **Risk Profile:** Moderate risk tolerance
+- **Investment Period:** 15-year horizon
+- **Goal:** retirement planning
 
 **Step 2: Risk Exposure Analysis**
 
 LLM evaluates:
-
 - **Equity Risk**: 50% allocation, with 10% concentrated in tech sector → high volatility.
 - **Debt Risk**: 30% allocation, but tilted toward corporate bonds → credit risk exposure.
 - **Hybrid Funds**: Balanced but may overlap with equity holdings.
@@ -149,7 +156,9 @@ LLM recommends:
 
 LLM translates technical analysis into plain language:
 
-*“Your portfolio is well diversified across equity and debt, but it is heavily tilted toward Indian technology stocks and corporate bonds. To reduce risk, we suggest adding global equity exposure, diversifying debt into dynamic bond funds, and increasing liquid fund allocation for emergencies.”*
+```
+Your portfolio is well diversified across equity and debt, but it is heavily tilted toward Indian technology stocks and corporate bonds. To reduce risk, we suggest adding global equity exposure, diversifying debt into dynamic bond funds, and increasing liquid fund allocation for emergencies.
+```
 
 **Step 7: Advisor Dashboard**
 
@@ -166,7 +175,7 @@ LLM translates technical analysis into plain language:
 - **Frontend (GPT-5)** → Converts technical insights into client-friendly explanations.
 - **Indian Market Context** → Uses SEBI-regulated mutual funds, Indian benchmarks (NIFTY, Sensex), and local debt instruments.
 
-  Here’s the **workflow diagram** you asked for — it shows how an LLM can analyze a client’s mutual fund portfolio in the Indian market step by step, from input data through risk analysis, diversification checks, scenario simulations, rebalancing suggestions, and finally client/advisor outputs.
+> **Instruction:** When drafting the solution in a Technical Specification Document (TSD) include a detailed **workflow diagram**. The diagram should depict how an LLM can analyze a client’s mutual fund portfolio in the Indian market step by step, from input data through risk analysis, diversification checks, scenario simulations, rebalancing suggestions, and finally client/advisor outputs.
 
   How to Read This Workflow
 
@@ -183,7 +192,7 @@ LLM translates technical analysis into plain language:
 
 ## 3.1 Data Ingestion & Integration
 
-The system must ingest data from multiple sources to provide a comprehensive view of the customer's financial health:
+The system should be able to ingest data from multiple sources to provide a comprehensive view of the customer's financial health:
 
 **Customer Portfolio:** Support for multiple ingestion methods:
 * **Direct Upload:** Importing structured files like CSV or JSON containing fund names, allocations, and transaction history.
@@ -198,7 +207,7 @@ The system must ingest data from multiple sources to provide a comprehensive vie
 
 ## 3.2 Portfolio Analysis & Insights
 
-The AI system will perform deep-dive analysis into the submitted portfolio:
+The AI based solution is expected to perform deep-dive analysis into the submitted portfolio:
 
 **Snapshot & Breakdown:** Categorize holdings by asset class (Equity, Debt, Hybrid, Liquid), sector exposure (e.g., Tech concentration), and geography.
 
@@ -226,6 +235,10 @@ The system provides tailored advice to optimize the portfolio:
 * **Loss Projection:** Similar to the "Power of Money" app, the system should estimate potential losses if a customer fails to exit "off-track" funds.
 
 # 4. Technical Solution & Architecture
+
+The solution should explore and evaluate Gent AI, available LLMs and Agentic AI solution in conjunction with opensource models, libraries and frameworks with microservices architecture for high scalability. The solution must be containerized and cloud agnostic.
+
+> **Instruction:** When drafting the solution in a Technical Specification Document (TSD) include 1. strategic designs (covering standard practices of Domain Driven Design like context diagram of each aspect, bounded context for segregating responsibilities, impact mapping etc) and 2. Tactical Designs (i.e implementation diagram showing physical tiers including servers, load balancers, firewalls, API gateway, notificaiton, storage, microfrontend, microservices etc). The tactical design should also be presented with help of necessary UML diagrams, Flow Charts and Data Flow Diagrams.
 
 ## 4.1 AI Model Strategy (Hybrid Approach)
 
