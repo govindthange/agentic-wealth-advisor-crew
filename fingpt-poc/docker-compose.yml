@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  fingpt-poc:
+    build: .
+    container_name: fingpt_mf_analyzer
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
