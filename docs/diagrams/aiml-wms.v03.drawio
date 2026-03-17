@@ -1,20 +1,20 @@
 <mxfile host="65bd71144e">
     <diagram id="technical_final" name="Integrated Mutual Fund AI">
-        <mxGraphModel dx="1326" dy="880" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+        <mxGraphModel dx="1618" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="s1" value="STAGE 1: INGESTION AND ETL" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontStyle=0" parent="1" vertex="1">
                     <mxGeometry x="20" y="30" width="450" height="630" as="geometry"/>
                 </mxCell>
-                <mxCell id="amfi_in" value="AMFI 5-Year&lt;div&gt;NAV History&lt;/div&gt;" style="shape=parallelogram;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" parent="s1" vertex="1">
-                    <mxGeometry x="155" y="50" width="140" height="40" as="geometry"/>
+                <mxCell id="amfi_in" value="AMFI 5-Year&lt;div&gt;NAV History&lt;/div&gt;&lt;div&gt;(text/csv)&lt;/div&gt;" style="shape=parallelogram;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" parent="s1" vertex="1">
+                    <mxGeometry x="150" y="40" width="140" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="nav_ms" value="&lt;b&gt;NAV MS&amp;nbsp;&lt;/b&gt;&lt;div&gt;(Daily Scraper for latest NAVs &amp;amp; fund catgories)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" parent="s1" vertex="1">
                     <mxGeometry x="170" y="160" width="100" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="mongo" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;MongoDB&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;(NAV History)&lt;/span&gt;&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;spacingTop=15;" parent="s1" vertex="1">
-                    <mxGeometry x="168.75" y="399" width="102.5" height="82" as="geometry"/>
+                <mxCell id="mongo" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;TimescaleDB&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;or&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;MongoDB&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;(NAV History)&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;spacingTop=15;" parent="s1" vertex="1">
+                    <mxGeometry x="168.75" y="380" width="102.5" height="121" as="geometry"/>
                 </mxCell>
                 <mxCell id="c2" value="HTTPS/Scrape" parent="s1" source="amfi_in" target="nav_ms" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -74,7 +74,7 @@
                     <mxGeometry x="819" y="30" width="320" height="630" as="geometry"/>
                 </mxCell>
                 <mxCell id="gpt5" value="GPT-5 Report Gen and Validation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;" parent="s3" vertex="1">
-                    <mxGeometry x="81" y="349" width="210" height="70" as="geometry"/>
+                    <mxGeometry x="81" y="344" width="210" height="70" as="geometry"/>
                 </mxCell>
                 <mxCell id="ui" value="Advisor Dashboard / Client Portal" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;" parent="s3" vertex="1">
                     <mxGeometry x="81" y="555" width="210" height="50" as="geometry"/>
