@@ -1,10 +1,12 @@
 version: '3.8'
 
 services:
-  fingpt-poc:
+  fingpt-server:
     build: .
-    container_name: fingpt_mf_analyzer
-    volumes:
-      - .:/app
+    container_name: fingpt_mf_server
+    # Use host network to resolve DNS and SSL issues
+    network_mode: "host" 
     environment:
       - PYTHONUNBUFFERED=1
+    # Note: 'ports' is ignored when using network_mode: host 
+    # as the app is already bound to the host's 8000
