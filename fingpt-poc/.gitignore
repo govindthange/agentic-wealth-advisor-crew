@@ -1,6 +1,7 @@
 logs/*.log
 data/*.json
 models/*.json
+models
 __pycache__/*
 .env
 *.pyc
