@@ -9,10 +9,9 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY server.py .
-COPY app.py .
+COPY . .
 
 EXPOSE 8000
 
-# Note the change here: "server:app" instead of "server.py:app"
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8000"]
+# This version allows the shell to expand the variables from the .env file
+CMD uvicorn server:app --host $SERVER_HOST --port $SERVER_PORT

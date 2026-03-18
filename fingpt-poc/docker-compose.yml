@@ -4,9 +4,14 @@ services:
   fingpt-server:
     build: .
     container_name: fingpt_mf_server
-    # Use host network to resolve DNS and SSL issues
-    network_mode: "host" 
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}" # This maps the port from .env to your host
+    dns:
+      - 8.8.8.8
+    env_file:
+      - .env  # This injects the variables INSIDE the container
+    volumes:
+      - .:/app
+      - ./models:/app/models
     environment:
       - PYTHONUNBUFFERED=1
-    # Note: 'ports' is ignored when using network_mode: host 
-    # as the app is already bound to the host's 8000

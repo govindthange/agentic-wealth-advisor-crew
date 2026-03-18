@@ -5,3 +5,5 @@ torch
 pandas
 fastapi
 uvicorn
+python-dotenv
+curl_cffi
