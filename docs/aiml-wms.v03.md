@@ -71,5 +71,3 @@ This service utilizes session-based requests to scrape the daily text files from
 3. **Tester Component (Internal):** The Off-track Logic Tester pulls actual user holdings from the **SQL DB** and historical volatility from the **Analytical Engines** to run the sector correction simulations.
 4. **JWT/REST Flow:** The connection between the MFCentral API and its microservice is explicitly labeled **REST/JWT**, highlighting the secure handshake required for fetching PAN-based data.
 5. **Scraping vs. Vectors:** The **NAV MS** uses **HTTPS Scraping** for AMFI, while the **Scheme MS** utilizes **gRPC** or specialized Vector client protocols for high-speed embedding storage in Pinecone.
-
-

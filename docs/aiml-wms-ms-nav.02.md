@@ -27,5 +27,3 @@ Before training, the raw NAV is transformed into high-order features:
 * **The Residual Signal:** The primary output isn't just a predicted NAV, but the **Residual** ().
 * **Interpretation:** If a fund's actual performance deviates significantly from the Random Forest's prediction based on historical features, the **Off-Track Tester** flags it.
 * **Downstream Impact:** This signal is passed via **JSON** to the Output Stage, triggering a compliance alert or a "Rebalance Recommendation" on the Client Portal.
-
-Would you like me to provide a **Python/Scikit-Learn snippet** that demonstrates the `TimeSeriesSplit` and `RandomForestRegressor` logic used in this specific microservice?

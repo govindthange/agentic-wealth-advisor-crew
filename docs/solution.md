@@ -14,5 +14,3 @@ The diagram [here](./diagrams/aiml-wms-arch.drawio) maps out these three distinc
 
 
 * **Persona-Based UI:** The output is split between a technical **Advisor Dashboard** and a user-friendly **Client Portal**, as requested.
-
-Would you like me to refine the specific data fields for the ML features or expand on the JWT authentication flow for the MFCentral microservice?

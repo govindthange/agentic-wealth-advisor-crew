@@ -104,5 +104,3 @@ To get a prediction from the model in the production environment, the `NAV MS` m
 }
 
 ```
-
-**Next Step:** Would you like me to create the **RAG Engine's** internal flowchart to show how it takes the "Off-Track" signal and searches the Vector DB to explain *why* the drift happened?

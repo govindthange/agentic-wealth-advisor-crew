@@ -124,4 +124,3 @@ Copy this code, save it as `Microservice_Internals.drawio`, and import it into *
 * **Data Fetch:** The `/cas_fetch` call retrieves the Consolidated Account Statement.
 * **Normalization:** The most complex internal step—mapping MFCentral's scheme names to the standardized AMFI codes. This ensures that the portfolio holdings can be correctly joined with the historical NAV data in the SQL DB.
 
-Would you like me to generate a **Python-based FastAPI structure** for the "MFCentral Sync MS" to show how the JWT middleware would look?
